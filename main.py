@@ -1,6 +1,7 @@
 import pygame
 
 from ControlsManager import ControlsManager
+from Constants import GameState
 from Game.GameManager import GameManager
 from Graphics.GraphicsManager import GraphicsManager
 
@@ -16,6 +17,8 @@ class GameEngine:
         self._clock = pygame.time.Clock()
         self._minTimePerFrame = 1.0 / 60 * 1000
         self._elapsedTime = 0
+
+        self.context = GameState.MAIN_MENU
 
         self._running = True
 
