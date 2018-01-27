@@ -3,9 +3,9 @@ import pygame
 from Constants import Direction
 
 class Player:
-    def __init__(self, posX=3, posY=3):
+    def __init__(self, posX=15, posY=92):
 
-        self._position = (6, 5)
+        self._position = (15, 92)
         self._speed = 2
         self._sprite = pygame.Surface((64, 64))
         self._sprite.fill((255, 0, 255))
