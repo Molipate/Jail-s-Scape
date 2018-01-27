@@ -1,23 +1,27 @@
 import pygame
 
+from Constants import GameState, RenderLevels
 
 class GraphicsManager:
 
-    def __init__(self, gameState):
+    def __init__(self):
 
-        self._gameState = gameState
+        self._gameState = None
         self._screen = pygame.display.set_mode((800, 600), pygame.DOUBLEBUF)
+
+    def setGameState(self, gameStates):
+        self._gameState = gameStates
 
     def render(self, currentState):
 
+        renderState = self._gameState.get(currentState)
 
-        """Game Mode"""
-        #Render Map
+        if currentState == GameState.GAME:
+            pass
+            #self._renderGame(renderState)
 
-        #Render characters
+    def _renderGame(self, game):
 
-        #Render UI
+        for level, datas in game:
+            if level == RenderLevels.WORLD_MAP:
 
-
-
-        pass

@@ -10,13 +10,17 @@ from Menu.MainMenu import MainMenu
 class GameEngine:
     def __init__(self):
 
+        self._controls = ControlsManager()
+        self._graphics = GraphicsManager()
+
         self.gameStates = {
             GameState.MAIN_MENU: MainMenu(),
             GameState.GAME: GameManager(),
         }
 
-        self._controls = ControlsManager(self.gameStates)
-        self._graphics = GraphicsManager(self.gameStates)
+        #Give gameStates to controls and graphics
+        self._controls.setGameState(self.gameStates)
+        self._graphics.setGameState(self.gameStates)
 
         self._clock = pygame.time.Clock()
         self._minTimePerFrame = 1.0 / 60 * 1000
