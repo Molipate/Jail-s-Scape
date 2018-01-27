@@ -1,15 +1,13 @@
 import pygame
 
-from Constants import GameState
+from Constants import GameState, Direction
 
 class ControlsManager:
     def __init__(self):
         self._gameState = None
         self._currentState = None
 
-        self._eventMap = {
-
-        }
+        pygame.key.set_repeat(10, 100)
 
     def handleEvent(self, currentState):
 
@@ -25,8 +23,7 @@ class ControlsManager:
                 if event.key == pygame.K_ESCAPE:
                     return GameState.QUIT
 
-                if event.key in self._eventMap.keys():
-                    eval("self._" + self._eventMap.get(event.key))(event)
+                self._gameState.get(self._currentState).pushEvent(event)
 
         return True
 
