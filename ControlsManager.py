@@ -3,8 +3,8 @@ import pygame
 from Constants import GameState
 
 class ControlsManager:
-    def __init__(self, gameState):
-        self._gameState = gameState
+    def __init__(self):
+        self._gameState = None
         self._currentState = None
 
         self._eventMap = {
@@ -32,3 +32,6 @@ class ControlsManager:
 
     def _setCurrentState(self, currentState):
         self._currentState = currentState
+
+    def setGameState(self, gameStates):
+        self._gameState = gameStates
