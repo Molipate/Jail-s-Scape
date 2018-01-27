@@ -6,4 +6,5 @@ class GameState:
     QUIT = 3
 
 class RenderLevels:
-    WORLD_MAP = 0
+    CONTEXT = 0
+    WORLD_MAP = 1

@@ -9,11 +9,11 @@ class GameManager:
 
         self._worldMap = WorldMap(os.path.join("Assets", "WorldMap", "Datas", "Map", "map1.tmx"))
 
-
     def update(self):
         pass
 
     def getRenderFrame(self):
         return {
+            RenderLevels.CONTEXT: None,
             RenderLevels.WORLD_MAP: self._worldMap,
         }

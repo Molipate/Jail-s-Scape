@@ -35,11 +35,10 @@ class GameEngine:
             self._elapsedTime += self._clock.tick()
             if self._elapsedTime >= self._minTimePerFrame:
                 self._elapsedTime = 0
-                self.gameStates.get(self._currentState).update()
+                #self.gameStates.get(self._currentState).update()
                 self._graphics.render(self._currentState)
 
             self._currentState = self._controls.handleEvent(self._currentState)
-
             if self._currentState == GameState.QUIT:
                 self._running = False
 
