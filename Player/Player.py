@@ -29,14 +29,25 @@ class Player:
     def getPanel(self):
         return self._panel
 
-    def tryCombine(self):
+    def tryCombine(self, itemsManager):
 
         selectedItem = [item for _, item in self._inventory.items() if item.isSelected()]
         selectedItemIdent = [item.getIdent() for item in selectedItem]
         selectedItemIdent.sort()
 
         if selectedItemIdent == [1, 2, 3, 4]:
-            pass
-            #self.pickItem(Item(ident=5, sprite=5, name="Transmitter", description="You're free now !"))
-            #for ident, item in self._inventory.items():
+
+            self.pickItem(Item(ident=5, sprite=itemsManager.getSprite(5), name="Transmitter", description="You're free now !"))
+            for ident, item in self._inventory.items():
+                if item in selectedItem:
+                    self._inventory.pop(ident)
+
+        itemList = [item for _, item in self._inventory.items()]
+        print itemList
+        self._inventory = {}
+        for i in range(len(itemList)):
+            self._inventory.update({i: itemList[i]})
+
+        print self._inventory
+        self._panel.setInventory(self._inventory)
 
