@@ -24,6 +24,7 @@ class GameEngine:
         self._running = True
 
     def start(self):
+
         while self._running:
 
             self._elapsedTime += self._clock.tick()
@@ -64,6 +65,7 @@ class GameEngine:
 
 if __name__ == '__main__':
     pygame.init()
+    pygame.mixer.init(frequency=22050, size=-16, channels=2, buffer=4096)
     pygame.font.init()
 
     pygame.display.set_caption("Jail's Scape")
@@ -74,4 +76,5 @@ if __name__ == '__main__':
     gameEngine.start()
 
     pygame.font.quit()
+    pygame.mixer.quit()
     pygame.quit()

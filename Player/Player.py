@@ -36,8 +36,8 @@ class Player:
         selectedItemIdent.sort()
 
         if selectedItemIdent == [1, 2, 3, 4]:
-
             self.pickItem(Item(ident=5, sprite=itemsManager.getSprite(5), name="Transmitter", description="You're free now !"))
+            self._panel.setText("You've built a TRANSMITTER !\nYou win the game !")
             for ident, item in self._inventory.items():
                 if item in selectedItem:
                     self._inventory.pop(ident)
@@ -50,4 +50,5 @@ class Player:
 
         print self._inventory
         self._panel.setInventory(self._inventory)
+
 
