@@ -37,7 +37,7 @@ class GameManager:
             if event == Event.SELECT:
                 self._onSelectItem()
 
-        self._player.tryCombine()
+        self._player.tryCombine(self._itemsManager)
 
     def getRenderFrame(self):
         return {
