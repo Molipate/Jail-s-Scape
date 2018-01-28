@@ -1,40 +1,47 @@
 import pygame
 
-from Constants import GameState, RenderLevels
+from Constants import GameState
+
 
 class GraphicsManager:
     def __init__(self):
 
-        self._gameState = None
-        self._screen = pygame.display.set_mode((1216, 704))#, pygame.FULLSCREEN)
+        self._tileSize = 64
+        self._nbTileWidth = 19
+        self._nbTileHeight = 11
+        self._screen = pygame.display.set_mode((1216, 704))  # , pygame.FULLSCREEN)
 
-    def setGameState(self, gameStates):
-        self._gameState = gameStates
+    def render(self, frame):
 
-    def render(self, currentState):
+        self._screen.fill((0, 0, 0))
+        renderState = frame.get("renderState")
 
-        self._screen.fill((255, 255, 65))
-        if currentState == GameState.GAME:
-            self._renderGame(self._gameState.get(currentState).getRenderFrame())
+        if renderState == "game":
+            self._renderGame(frame)
 
         pygame.display.flip()
 
-    def _renderGame(self, game):
+    def _renderGame(self, frame):
 
-        context = game.get(RenderLevels.CONTEXT)
+        context = frame.get("context")
+        worldMap = frame.get("worldMap")
+        player = frame.get("player")
+        playerPanel = frame.get("playerPanel")
+        itemsManager = frame.get("items")
 
-        def _renderWorldMap(datas):
+        def getPositionFromTile(tilePosition):
+            tileSize = context.getTileSize()
             camera_x, camera_y = context.getCameraPosition()
-            self._screen.blit(datas.getWorldMap(), (camera_x * 64, camera_y * 64))
+            tile_x, tile_y = tilePosition
+            return (tile_x - camera_x) * tileSize, (tile_y - camera_y) * tileSize
 
-        def _renderPlayer(datas):
-            sprite = datas.getSprite()
-            player_x, player_y = context.getPlayerPosition()
-            self._screen.blit(sprite, (player_x * 64, player_y * 64))
+        self._screen.blit(worldMap.getWorldMap(), context.getCameraRenderPosition())
 
-        for level, datas in game.items():
-            if level == RenderLevels.WORLD_MAP:
-                _renderWorldMap(datas)
+        for position, item in itemsManager.getItems().items():
+            sprite = item.getSprite()
+            self._screen.blit(sprite, getPositionFromTile(position))
 
-            if level == RenderLevels.PLAYER:
-                _renderPlayer(datas)
+        player_x, player_y = player.getPosition()
+        self._screen.blit(player.getSprite(), getPositionFromTile((player_x, player_y - 1)))
+
+        self._screen.blit(playerPanel.getSurface(), playerPanel.getPosition())

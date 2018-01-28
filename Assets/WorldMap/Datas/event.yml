@@ -1,0 +1,12 @@
+event0:
+    posX: 10
+    posY: 12
+    eventType: 2
+    sub:
+        sub0: 1
+event1:
+    posX: 10
+    posY: 12
+    eventType: 2
+    sub:
+        sub0: 2

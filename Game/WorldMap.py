@@ -1,12 +1,10 @@
 import pygame
-import pytmx
 
-from pytmx import TiledMap
 from pytmx import TiledTileLayer
 from pytmx.util_pygame import load_pygame
 
-class WorldMap:
 
+class WorldMap:
     def __init__(self, filename):
 
         self._tmxData = load_pygame(filename)
